@@ -10,24 +10,15 @@ defmodule VhsDevTest.Blocknative.Client do
 
   ### Examples
 
-      payload = %{
+      payload = Jason.encode!(%{
         apiKey: Application.get_env(:vhs_dev_test, :blocknative)[:api_key],
-        hash: "0xa53883b59fd573e268b32ded997fdb0ed24da9fa84e40fde30a41103e310c286"},
+        hash: "0xa53883b59fd573e268b32ded997fdb0ed24da9fa84e40fde30a41103e310c286",
         blockchain: "ethereum",
         network: "main"
-      }
+      })
       {:ok, req} = VhsDevTest.Blocknative.Request.new(:post, "/transaction", [], payload)
-
-      case VhsDevTest.Blocknative.Client.request(req) do
-        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        debug(Jason.decode!(body))
-
-        {:ok, %HTTPoison.Response{status_code: 404}} ->
-          debug("Not found :(")
-
-        {:error, %HTTPoison.Error{reason: reason}} ->
-          debug(reason)
-      end
+      VhsDevTest.Blocknative.Client.request(req)
+      ->  %{"msg" => "success"}
   """
 
   # use DebugTest.PipeDebug

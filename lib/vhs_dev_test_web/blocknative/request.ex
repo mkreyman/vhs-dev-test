@@ -15,23 +15,23 @@ defmodule VhsDevTest.Blocknative.Request do
     payload: :any
   }
 
-  @required_fields [:method, :headers, :url, :query]
+  @required_fields [:method, :headers, :url, :query, :payload]
 
   defstruct [:method, :headers, :url, :query, :payload]
 
-  def new(method, resource, query \\ [])
-  def new(method, resource, query) when is_binary(method) do
-    params = %{method: method, headers: build_headers(), url: build_url(resource), query: query}
+  def new(method, resource, query \\ [], payload)
+  def new(method, resource, query, payload) when is_binary(method) do
+    params = %{method: method, headers: build_headers(), url: build_url(resource), query: query, payload: payload}
     # |> debug("params")
 
     cast({%Request{}, @schema}, params, @required_fields)
     |> apply_action(:insert)
   end
 
-  def new(method, resource, query) when is_atom(method) do
+  def new(method, resource, query, payload) when is_atom(method) do
     method
     |> Atom.to_string()
-    |> Request.new(resource, query)
+    |> Request.new(resource, query, payload)
   end
 
   def changeset(request \\ %Request{}, params \\ %{}) do
