@@ -35,11 +35,15 @@ defmodule VhsDevTest.MixProject do
     [
       {:phoenix, "~> 1.5.9"},
       {:phoenix_live_dashboard, "~> 0.4"},
+      {:phoenix_ecto, "~> 4.3"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:httpoison, "~> 1.6"},
+      # PipeDebug library
+      {:debug_test_lib, github: "mkreyman/debug_test_lib", only: [:dev, :test], runtime: false}
     ]
   end
 
