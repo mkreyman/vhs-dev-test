@@ -1,6 +1,5 @@
 defmodule VhsDevTestWeb.BlocknativeController do
   use VhsDevTestWeb, :controller
-  use DebugTest.PipeDebug
 
   def webhooks(conn, _params) do
     conn
@@ -14,11 +13,9 @@ defmodule VhsDevTestWeb.BlocknativeController do
     |> send_resp(200, "ok")
   end
 
-  defp store_transaction(conn) do
-    # call cache.set/2
-    conn.resp_body
-    |> debug("response body")
-
+  defp store_transaction(%Plug.Conn{body_params: body} = conn) do
+    key = body["hash"]
+    TransactionsCache.Cache.fetch(key, fn -> body end)
     conn
   end
 

@@ -6,15 +6,19 @@ defmodule VhsDevTest.Application do
   use Application
 
   def start(_type, _args) do
+    import Supervisor.Spec, warn: false
+
     children = [
       # Start the Telemetry supervisor
       VhsDevTestWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: VhsDevTest.PubSub},
       # Start the Endpoint (http/https)
-      VhsDevTestWeb.Endpoint
+      VhsDevTestWeb.Endpoint,
       # Start a worker by calling: VhsDevTest.Worker.start_link(arg)
       # {VhsDevTest.Worker, arg}
+      # Transactions cache supervisor
+      supervisor(TransactionsCache.Supervisor, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
