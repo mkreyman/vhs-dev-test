@@ -13,6 +13,12 @@ config :vhs_dev_test, VhsDevTestWeb.Endpoint,
   check_origin: false,
   watchers: []
 
+
+# Enable or disable PipeDebug
+config :logger,
+  level: :debug,
+  enable_pipe_debug: true
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

@@ -3,10 +3,21 @@ defmodule VhsDevTestWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug VhsDevTestWeb.ReadHeader
   end
 
   scope "/api", VhsDevTestWeb do
     pipe_through :api
+  end
+
+  scope "/blocknative-webhook" do
+    pipe_through :api
+    post "/", VhsDevTestWeb.BlocknativeController, :webhooks
+  end
+
+  scope "/transaction" do
+    pipe_through :api
+    get "/", VhsDevTestWeb.TransactionController, :request_status
   end
 
   # Enables LiveDashboard only for development
