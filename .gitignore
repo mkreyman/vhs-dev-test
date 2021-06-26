@@ -29,3 +29,4 @@ vhs_dev_test-*.tar
 
 # MacOS junk
 .DS_Store
+lib/.DS_Store

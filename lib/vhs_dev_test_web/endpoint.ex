@@ -39,7 +39,7 @@ defmodule VhsDevTestWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
-  plug VhsDevTestWeb.ReadHeader
+  # plug VhsDevTestWeb.ReadHeader
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
