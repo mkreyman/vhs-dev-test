@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  web:
+    image: shufo/phoenix:latest
+    restart: always
+    tty: true
+    entrypoint: # Override open source container entrypoint which is incorrect and missing config
+      - sh
+      - -c
+      - mix deps.get && mix phx.server
+    environment: 
+      - HEX_UNSAFE_HTTPS=1
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    working_dir: /app
+
+volumes:
+  app:
