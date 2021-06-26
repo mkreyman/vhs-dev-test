@@ -3,7 +3,7 @@ defmodule VhsDevTestWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug VhsDevTestWeb.ReadHeader
+    # plug VhsDevTestWeb.ReadHeader
   end
 
   scope "/api", VhsDevTestWeb do
@@ -18,6 +18,11 @@ defmodule VhsDevTestWeb.Router do
   scope "/transaction" do
     pipe_through :api
     get "/", VhsDevTestWeb.TransactionController, :request_status
+  end
+
+  scope "/transactions" do
+    pipe_through :api
+    get "/", VhsDevTestWeb.TransactionController, :watched_transactions
   end
 
   # Enables LiveDashboard only for development
