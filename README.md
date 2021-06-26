@@ -1,18 +1,29 @@
 # VhsDevTest
 
+Setup your environment:
+ 
+  * Register for an account at blocknative.com
+  * Download and install `ngrok` to be able to use your locally running application as a blocknative webhook, i.e.
+    `http://xxxxxxxx.ngrok.io/blocknative-webhook`
+  * Add the following variable to your ~/.bash_profile
+    `export BLOCKNATIVE_API_KEY='<your_blocknative_api_key>'`
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
   * Start Phoenix endpoint with `mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Add a transaction to watchlist:
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+http://xxxxxxx.ngrok.io/transaction?txid=<transaction_hash>
 
-## Learn more
+Get a list of watched transactions:
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+http://xxxxxxx.ngrok.io/transactions
+
+
+## Useful links
+
+  * Blocknative API: https://docs.blocknative.com/webhook-api#add-transaction-to-watch
+  * Slack API: https://api.slack.com/messaging/webhooks
+
