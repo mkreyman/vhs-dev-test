@@ -18,7 +18,7 @@ defmodule VhsDevTestWeb.TransactionController do
   defp handle_success(conn, message) do
     message =
       message
-      |> Jason.encode!
+      |> Jason.encode!()
 
     conn
     |> put_resp_content_type("application/json")

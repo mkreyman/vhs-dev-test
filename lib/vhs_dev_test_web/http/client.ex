@@ -1,26 +1,4 @@
 defmodule VhsDevTest.Http.Client do
-  @moduledoc ~S"""
-  This module defines the `Http.Client` struct and is responsible for building
-  and establishing requests to Blocknative APIs.
-
-  ### Notes
-
-  * Note one.
-  * Note two.
-
-  ### Examples
-
-      payload = Jason.encode!(%{
-        apiKey: Application.get_env(:vhs_dev_test, :blocknative)[:api_key],
-        hash: "0xa53883b59fd573e268b32ded997fdb0ed24da9fa84e40fde30a41103e310c286",
-        blockchain: "ethereum",
-        network: "main"
-      })
-      {:ok, req} = VhsDevTest.Http.Request.new(:post, "/transaction", [], payload)
-      VhsDevTest.Http.Client.request(req)
-      ->  %{"msg" => "success"}
-  """
-
   # use DebugTest.PipeDebug
   alias VhsDevTest.Http.Request
 
@@ -63,8 +41,12 @@ defmodule VhsDevTest.Http.Client do
         rescue
           _ -> body
         end
-      {:ok, %HTTPoison.Response{status_code: 404}} -> "Not found :("
-      {:error, %HTTPoison.Error{reason: reason}} -> reason
+
+      {:ok, %HTTPoison.Response{status_code: 404}} ->
+        "Not found :("
+
+      {:error, %HTTPoison.Error{reason: reason}} ->
+        reason
     end
   end
 

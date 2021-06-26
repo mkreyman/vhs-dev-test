@@ -1,5 +1,4 @@
 defmodule VhsDevTest.Slack.Client do
-
   @slack_webhook Application.get_env(:vhs_dev_test, :slack)[:webhook]
 
   def call(%{"hash" => hash, "status" => status}) do

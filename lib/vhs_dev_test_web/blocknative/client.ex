@@ -1,5 +1,4 @@
 defmodule VhsDevTest.Blocknative.Client do
-
   @blocknative_api Application.get_env(:vhs_dev_test, :blocknative)[:api]
   @blocknative_api_key Application.get_env(:vhs_dev_test, :blocknative)[:api_key]
 
