@@ -30,6 +30,10 @@ config :vhs_dev_test, :blocknative,
   api_key: System.get_env("BLOCKNATIVE_API_KEY"),
   eth_address: System.get_env("ETH_ADDRESS")
 
+# Slack configuration
+config :vhs_dev_test, :slack,
+  webhook: "https://hooks.slack.com/services/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"
+
 config :vhs_dev_test, :http_client, HTTPoison
 
 # Import environment specific config. This must remain at the bottom

@@ -13,7 +13,6 @@ config :vhs_dev_test, VhsDevTestWeb.Endpoint,
   check_origin: false,
   watchers: []
 
-
 # Enable or disable PipeDebug
 config :logger,
   level: :debug,

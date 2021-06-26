@@ -3,8 +3,15 @@ defmodule VhsDevTestWeb.BlocknativeController do
 
   def webhooks(conn, _params) do
     conn
+    |> notify_slack()
     |> store_transaction()
     |> handle_success()
+  end
+
+  def notify_slack(conn) do
+    %Plug.Conn{body_params: body} = conn
+    spawn_link(VhsDevTest.Slack.Client, :call, [body])
+    conn
   end
 
   defp handle_success(conn) do

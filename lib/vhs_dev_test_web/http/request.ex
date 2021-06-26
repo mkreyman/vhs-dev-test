@@ -1,11 +1,8 @@
-defmodule VhsDevTest.Blocknative.Request do
-
+defmodule VhsDevTest.Http.Request do
   import Ecto.Changeset
   # use DebugTest.PipeDebug
 
   alias __MODULE__, warn: false
-
-  @api Application.get_env(:vhs_dev_test, :blocknative)[:api]
 
   @schema %{
     method: :string,
@@ -19,19 +16,27 @@ defmodule VhsDevTest.Blocknative.Request do
 
   defstruct [:method, :headers, :url, :query, :payload]
 
-  def new(method, resource, query \\ [], payload)
-  def new(method, resource, query, payload) when is_binary(method) do
-    params = %{method: method, headers: build_headers(), url: build_url(resource), query: query, payload: payload}
+  def new(method, url, query \\ [], payload)
+
+  def new(method, url, query, payload) when is_binary(method) do
+    params = %{
+      method: method,
+      headers: build_headers(),
+      url: url,
+      query: query,
+      payload: payload
+    }
+
     # |> debug("params")
 
     cast({%Request{}, @schema}, params, @required_fields)
     |> apply_action(:insert)
   end
 
-  def new(method, resource, query, payload) when is_atom(method) do
+  def new(method, url, query, payload) when is_atom(method) do
     method
     |> Atom.to_string()
-    |> Request.new(resource, query, payload)
+    |> Request.new(url, query, payload)
   end
 
   def changeset(request \\ %Request{}, params \\ %{}) do
@@ -43,10 +48,6 @@ defmodule VhsDevTest.Blocknative.Request do
   defp validate(changeset) do
     changeset
     |> validate_required(@required_fields)
-  end
-
-  defp build_url("/transaction" = resource) do
-    @api <> resource
   end
 
   defp build_headers() do

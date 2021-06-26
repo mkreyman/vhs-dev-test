@@ -2,10 +2,14 @@ defmodule TransactionsCache.Cache do
   use GenServer
 
   def start_link(opts \\ []) do
-    GenServer.start_link(__MODULE__, [
-      {:ets_table_name, :transaction_cache_table},
-      {:log_limit, 100_000}
-    ], opts)
+    GenServer.start_link(
+      __MODULE__,
+      [
+        {:ets_table_name, :transaction_cache_table},
+        {:log_limit, 100_000}
+      ],
+      opts
+    )
   end
 
   def fetch(hash, default_value_function) do
