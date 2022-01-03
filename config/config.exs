@@ -31,8 +31,7 @@ config :vhs_dev_test, :blocknative,
   eth_address: System.get_env("ETH_ADDRESS")
 
 # Slack configuration
-config :vhs_dev_test, :slack,
-  webhook: "https://hooks.slack.com/services/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"
+config :vhs_dev_test, :slack, webhook: System.get_env("SLACK_WEBHOOK_URL")
 
 config :vhs_dev_test, :http_client, HTTPoison
 
